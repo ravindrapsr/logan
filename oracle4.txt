@@ -1,0 +1,201 @@
+1.
+CREATE TABLE CustomerTable(
+Customerid Number(5),
+CustomerName Number(10),
+Address1 Varchar2(30),
+Address2 Varchar2(30));
+
+2.
+ALTER TABLE CustomerTable
+MODIFY CustomerName Varchar2(30);
+
+3.
+ALTER TABLE CustomerTable
+ADD (
+Gender Varchar2(1),
+Age Number(3),
+PhoneNo	Number(10));
+
+4.
+Insert into CustomerTable values (1000, 'Allen', '#115 Chicago', '#115 Chicago', 'M', 25, '7878776');
+Insert into CustomerTable values (1001, 'George', '#116 France', '#116 France','M', 25, '434524');
+Insert into CustomerTable values(1002, 'Becker', '#114 New York', '#114 New York', 'M', 45, '431525');
+
+
+5.
+ALTER TABLE CUSTOMERTABLE
+ADD CONSTRAINT Custld_Prim PRIMARY KEY(CUSTOMERID);
+
+6.
+Insert into CustomerTable values(1002, 'John', '#114 Chicago', '#114 Chicago', 'M', 45, '439525');
+
+***MSG:unique constraint (LAB2ETRG22.CUSTLD_PRIM) violated
+
+7.
+ALTER TABLE CustomerTable
+DISABLE CONSTRAINT Custld_Prim;
+
+Insert into CustomerTable values (1002, 'Becker', '#114 New York', '#114 New york' , 'M', 45, '431525');
+Insert into CustomerTable values (1003, 'Nanapatekar', '#115 India', '#115 India' , 'M', 45, '431525');
+
+8.
+ALTER TABLE CustomerTable
+ENABLE CONSTRAINT Custld_Prim;
+
+***MSG:cannot validate (LAB2ETRG22.CUSTLD_PRIM) - primary key violated
+
+9.
+ALTER TABLE CustomerTable
+DROP CONSTRAINT Custld_Prim;
+
+Insert into CustomerTable values (1002, 'Becker', '#114 New York', '#114 New york' , 'M', 45, '431525' );
+Insert into CustomerTable values (1003, 'Nanapatekar', '#115 India', '#115 India' , 'M', 45, '431525');
+
+10.
+TRUNCATE TABLE CUSTOMERTABLE;
+
+11.
+ALTER TABLE CUSTOMERTABLE
+ADD E_MAIL VARCHAR2(40);
+
+12.
+ALTER TABLE CUSTOMERTABLE
+DROP COLUMN E_MAIL;
+
+13.
+ALTER TABLE CUSTOMERTABLE
+ADD E_MAILId VARCHAR2(40);
+
+14.
+ALTER TABLE CustomerTable SET UNUSED COLUMN E_MAILId;
+
+15.
+ALTER TABLE CUSTOMERTABLE
+DROP COLUMN E_MAILId;
+
+16.
+COMMENT ON table CustomerTable IS 'Customer Details'; 
+
+17.
+select * from USER_TAB_COMMENTS where table_name='CUSTOMERTABLE' ;
+
+18.
+COMMENT ON column CustomerTable.PHONENO IS 'Personal Contact no'; 
+
+19.
+select * from USER_COL_COMMENTS where table_name='CUSTOMERTABLE';
+
+20.
+CREATE TABLE Suppliers AS SELECT CUSTOMERID,CUSTOMERNAME,ADDRESS1,ADDRESS2,PHONENO FROM CUSTOMERTABLE;
+
+21.
+DROP TABLE SUPPLIERS;
+drop table customermaster cascade constraints;
+
+22.
+CREATE TABLE CustomerMaster
+(
+CustomerId Number(5) constraint CustId_PK Primary key,
+CustomerName Varchar2(30) Not Null,
+Addressl Varchar2(30) Not Null,
+Address2 Varchar2(30),
+Gender Varchar2(1),
+Age Number(3),
+PhoneNo Number(10)
+);
+
+23.
+CREATE TABLE AccountsMaster
+(
+Customerld Number(5),
+AccountNumber Number(10,2) constraint Acco_PK Primary key,
+AccountType Char(3),
+LedgerBalance Number(10,2) Not Null
+);
+
+create sequence acc_se_no
+minvalue 1000000001
+maxvalue 2000000000
+increment by 1
+cache 20;
+
+24.
+Insert into CustomerTable values (1000, 'Allen', '#115 Chicago', '#115 Chicago', 'M', 25, '7878776');
+Insert into CustomerTable values (1001, 'George', '#116 France', '#116 France', 'M', 25, '434524');
+Insert into CustomerTable values (1002, 'Becker', '#114 New York', '#114 New York', 'M', 45, '431525');
+
+25.
+ALTER TABLE ACCOUNTSMASTER
+ADD CONSTRAINT acc_chk CHECK (ACCOUNTTYPE IN ('NRI','IND'));
+
+26.
+Insert into AccountsMaster values (acc_se_no.nextval, 12345, 'NRI', 123456);
+Insert into AccountsMaster values (acc_se_no.nextval, 22345, 'NRI', 173456);
+Insert into AccountsMaster values (acc_se_no.nextval, 32345, 'IND', 124456);
+Insert into AccountsMaster values (acc_se_no.nextval, 42345, 'IND', 923456);
+Insert into AccountsMaster values (acc_se_no.nextval, 52345, 'NRI', 623456);
+
+27.
+ALTER TABLE ACCOUNTSMASTER
+ADD CONSTRAINT Balance_Chk CHECK (ledgerbalance>5000);
+
+28.
+ALTER TABLE AccountsMaster
+DROP CONSTRAINT Cust_acc;
+
+ALTER TABLE Accountsmaster
+add constraint Cust_chk foreign key references CustomerMaster(CustomerId) on delete cascade;
+
+29.
+create table AccountDetails as select * from accountmaster;
+
+30.
+alter table accountdetails rename to backuptable;
+
+31.
+create view Acc_view (CustCode,AccountHolderName,AccountNumber,Type,Balance) as
+select customerid,customername,accountnumber,accounttype,ledgerbalance from accountmaster;
+
+32.
+ create view vAccs_Dtls as
+ select * from accountmaster where accounttype='IND' and ledgerbalance >10000 with check option;
+
+33.
+create view accsvw10 as
+ select * from accountmaster with read only constraint ro;
+
+34.
+select dept_code from (select dept_code from staff_master where staff_sal in (select max(staff_sal) from staff_master)) a
+where a.dept_code=dept_code;
+
+35.
+select a.dept_code,a.staff_sal
+from staff_master a
+where a.staff_code IN
+(SELECT B.STAFF_CODE FROM staff_master b where a.dept_code=b.dept_code AND rownum<=2);
+
+36.
+CREATE SEQUENCE Seq_Dept
+MINVALUE 40
+MAXVALUE 200
+INCREMENT BY 10;
+
+37.
+INSERT INTO DEPT VALUES(Seq_Dept.nextval,'censor');
+
+38.
+ALTER SEQUENCE SEQ_DEPT INCREMENT BY 5;
+
+39.
+DROP SEQUENCE SEQ_DEPT;
+
+40.
+CREATE UNIQUE INDEX No_Name  ON dept (Dept_No,DEPT_name);
+
+41.
+SELECT * FROM USER_INDEXES WHERE TABLE_NAME='DEPT';
+
+42.
+CREATE PUBLIC SYNONYM synEmp for EMP;
+
+43.
