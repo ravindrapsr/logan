@@ -1,0 +1,938 @@
+﻿					LAB 2
+							
+						
+1.	To display the current working directory, the command is: 
+ANS:	pwd
+
+2.	Display the path to and name of your HOME directory.
+ANS:	pwd
+	
+3.	Display the login name using which you have logged into the system
+ANS: whoami
+
+4.	Display the hidden files of your current directory.
+ANS: ls -a
+
+5.	List the names of all the files in your home directory.
+ANS: ls
+
+6.	Using the long listing format to display the files in your directory. 
+ANS: ls -l
+
+7.	List the files beginning with chap followed by any number or any lower case alphabet.  (Example, it should display all files whose names are like chap1, chap2, chap3 ……., chapa,ahapb,chapc,……..)
+ANS: ls chap*
+
+8.	Give appropriate command to create a directory called C_prog under your home directory. (Note: Check the directory using ls)
+ANS: mkdir C_prog
+
+9.	Create the following directories under your home directory. (Note: Check using ls)
+newdir
+newdirectory
+ANS: mkdir newdir newdirectory
+
+10.	List the names of all the files, including the contents of the sub directories under your home directory.
+ANS: 
+
+11.	Remove the directory called newdirectory from your working directory.
+ANS: rm -r newdirectory
+
+12.	Create a directory called temp under your home directory.
+ANS: mkdir temp
+
+13.	Remove the directory called newdir under your home directory and verify the above with the help of the directory listing command.
+ANS: rm -r newdir
+
+14.	Create another directory directorynew under the temp directory.
+ANS: mkdir temp
+	 ls
+	 mkdir directorynew	
+
+15.	Change the directory to your home directory.
+ANS: cd
+
+16.	From your home directory, change the directory to directorynew using relative and absolute path.
+ANS: 
+
+17.	Remove the directory called c_prog, which is in your home directory.
+ANS:rm -r C_prog
+
+18.	Change to the directory /etc and display the files present in it.
+ANS: 
+
+19.	List the names of all the files that begin with a dot in the /usr/bin directory.
+ANS: ls -a /usr/bin
+
+20.	Create a file first.unix with the following contents.
+	Hi! Good Morning everybody.
+	Welcome to the First exercise on UNIX.
+	Hope you enjoy doing the assignments.
+ANS: touch first.unix
+	 cat > first.unix
+	 Hi! Good Morning everybody.
+	 Welcome to the First exercise on UNIX.
+	 Hope you enjoy doing the assignments.
+	 cntrl+c
+	 
+21.	Copy the file first.unix in your home directory to first.unics.
+       (Note: checked using ls, first.unix file also should exist along with first.unics)
+ANS: cp first.unix first.unics
+
+22.	List the contents of first.unix and first.unics with a single command.
+ANS: cat first.unix first.unics
+
+23.	Create a new directory under the temp directory.
+ANS: mkdir /tmp/new
+
+24.	From your home directory, copy all the files to the directory created under the temp sub directory.
+ANS: cp -r * /tmp/new/
+
+25.	Move the file first.unix to the directory temp as second.unix 
+ANS: mkdir /tmp/second.unix 
+	 mv first.unix /tmp/second.unix
+
+26.	Remove the file called first.unics from the home directory.
+ANS: rm first.unics
+
+27.	Change your directory to temp and issue the command rm *.  What do you observe?
+ANS: mv newdir /tmp/
+
+28.	Move all files whose names end with a, c and o to the HOME directory.
+ANS: 
+
+29.	Copy all files that end with a ‘UNIX’ to the temp directory.
+ANS: 
+
+30.	Issuing a single command, remove all the files from the directory temp and the directory itself.
+ANS: rm -rf /temp
+
+31.	Try commands cp and mv with invalid number of arguments and note the results.
+ANS: cp ji.doc /home/lab2e/pune aaa
+		target 'aaa' is not a directory
+		
+	 mv ji.doc /home/lab2e/pune aaa
+		target 'aaa' is not a directory	
+		
+
+32.	Use the cat command to create a file friends, with the following data:
+	Madhu  		6966456		09/07/68
+	Jamil 	 	2345215		08/09/67
+	Ajay	 	5546785		01/04/66
+	Mano		7820022		09/07/68
+	David	 	8281292		09/09/60
+	Simmi	 	7864563		12/12/70
+	Navin	 	2224311		30/05/68
+	The fields should be separated by a tab.
+ANS: 	cat > file\friends
+		Madhu  		6966456		09/07/68
+		Jamil 	 	2345215		08/09/67
+		Ajay	 	5546785		01/04/66
+		Mano		7820022		09/07/68
+		David	 	8281292		09/09/60
+		Simmi	 	7864563		12/12/70
+		Navin	 	2224311		30/05/68
+		cntrol+c
+
+33.	Display contents of the file friends.
+ANS: 	cat file\friends 
+
+34.	Copy contents of friends to newfriend without using the cp command.
+ANS:	cat<friends>newfriend
+				OR
+		tee newfriend < friends			
+
+35.	Display contents of the file friends and newfriends in a single command.
+ANS: cat file\friends newfriends
+
+36.	Find all users currently working on the system and store the output in a file named as users.
+ANS: 	who > users
+		cat users
+
+37.	Append contents of friends file to the file, users.
+
+38.	Display current system date and time and record your observations.  How is the time displayed?
+ANS:	date "+ %F %T"
+		2018-04-06 15:26:29
+
+
+39.	Display calendar for the month and year of your birth.
+ANS: cal 12 1995
+
+40.	Try following commands and record your observations.
+ANS:	date “+ %” -  %
+
+		date “+%m” - 04
+
+		date “+%D”  - 04/06/18
+
+		date “+%/%Training Activity” - %/15:29:39raining Activity
+
+		date “+%Training Activity” - 15:31:05raining Activity
+
+		date “+%r” - 03:31:36 PM
+
+
+
+
+
+
+
+										LAB-3
+
+3.1:  Viewing the File System and Granting/Removing Permissions
+        (Note: Create required files if doesn’t exists.)
+
+
+1.	Give the execute permission for the user for a file chap1
+ANS: 	chmod u+x chap1
+
+2.	Give the execute permission for user, group and others for a file add.c
+ANS: 	chmod u+x add.c
+		chmod g+x add.c
+		chmod o+x add.c
+
+3.	Remove the execute permission from user, give read permission to group and others for a file aa.c
+ANS: 	chmod u-x aa.c
+		chmod g+r aa.c
+		chmod o+r aa.c
+
+4.	Give execute permission for users for a.c, kk.c, nato and myfile using single command
+ANS: 	chmod u+x a.c kk.c nato myfile
+
+5.	Change the directory to root directory. Check the system directories, like bin, etc, usr etc
+ANS:	cd /
+		cd bin
+		cd ..
+		cd etc
+		cd ..
+		cd usr
+		
+		
+		
+						
+						
+							    
+					LAB - 4
+4.1: Using Pipes and Filters:
+
+1: Redirect the content of the help document ls, into a file called as lsdoc.
+ANS: ls --help>lsdoc
+
+2: Display the content of the lsdoc page wise.
+ANS: more lsdoc
+
+3: Display only the first 4 lines of the lsdoc file.
+ANS: head -4 lsdoc
+
+4: Display only the last 7 lines of the file lsdoc.
+ANS: tail -7 lsdoc
+
+5: Remove the file lsdoc.
+ANS: rm lsdoc
+
+6: There will be B’day celebration from the friends file, find how many B’day parties will be held.  If two of the friends have the B’date on the same day, then we will be having one party on that day.
+ANS: cut -f3 friends|sort|uniq|wc -l
+
+7: Display the lines starting with Ma, in the file friends.
+ANS: grep "^Ma" friends
+
+8: Display the lines starting with Ma, ending with i or ending with id, in the file friends.
+ANS: grep "^Ma[a-z]*[i$id$]" friends
+
+9: Print all the files and the directory files from the current directory across all the sub directories, along with its path
+ANS: ls -l
+
+10: Print only the Directory files.
+ANS: ls -d*/
+
+11: Display the files starting with chap, along with its path.
+ANS: 
+
+12: Sort the file friends in ascending order of names. 
+ANS: sort friends
+
+13: Display the contents of the file friends in uppercase letters.
+ANS: tr "[]"
+
+14: Store the contents of your home directory in a file called dir.
+ANS: cp -r * /home/lab2e11/dir
+
+15: From the above file dir, display the file permissions and the name of the file only.
+ANS: ls -l dir |tr -s " " | cut -d" "-f1,9|grep -v d
+	total 
+
+16: From the same dir file, store only the file names in a file called files.
+ANS:ls -l dir|tr -s" "|cut -d" " -f9|grep -v d> files
+
+17: From the same dir file, store only the permissions of files in a file called perms.
+ANS: ls -l|tr -s" "|cut -d" "-f1>perms
+	cat perms
+	ls -l dir|tr -s" "|cut -d" "-f1>perms
+	cat perms
+
+18: From the same dir file, store only the file sizes in a file called sizes.
+ANS: -bash-3.2$ ls -l|tr -s" "|cut -d" "-f5>size
+	 -bash-3.2$cat sizes
+	 -bash-3.2$ls -l dir|tr -s" "|cut -d" "-f5>sizes
+	 -bash-3.2$cat sizes
+
+19: Display the file names, sizes and permissions from your directory in that order.  
+ANS:	-bash-3.2$paste files sizes perms
+
+20: Display the number of users working on the system.
+ANS:	who |wc -l
+
+21: Find out the smallest file in your directory.
+ANS:	ls -l dir|tr -s " "|cut -d" " -f5,9|sort -n|head -8
+
+22: Display the total number of lines present in the file friends.
+ANS:	-bash-3.2$wc -l friends
+
+23:Create the following fixed record format files (with “|” delimiter between fields) with the structure given below, and populate them with relevant data use these files to solve following questions
+emp.lst: Empid(4),Name(18),Designation(9),Dept(10),Date of  Birth(8),Salary(5)
+dept.lst : Dept.Code(2),Name(10),Head of Dept’s id(4)
+desig.lst: Designation Abbr.(2), Name (9)
+
+1.	Find the record lengths of each file.
+ANS: wc -l emp.lst
+	 wc -l dept.lst
+	 wc -l desig.lst
+	 
+2.	Display only the date of birth and salary of the last employee record.
+ANS:	tail -l emp.lst|cut -d"|" -f5,6
+
+3.	Extract only employee names and designations. (Use column specifications). Save output as cfile1.
+ANS: 	cut -d"|" -f2,3 emp.lst>cfile1
+		cat cfile1
+		Name(18)|Designation(9)
+
+4.	Extract Emp.id, dept, dob and salary. (Use field specifications). Save output as cfile2.
+ANS: 	cut -d"|" -f1,4,5,6 emp.lst>cfile2
+		cat cfile2
+		Empid(4)|Dept(10)|Date_of_birth(8)|Salary(5)
+
+5.	Fix the files cfile1 and cfile2 laterally, along with the delimiter.
+ANS:  	paste cfile1 cfile2
+		Name(18)|Designation(9)|Empid(4)|Dept(10)|Date_of_birth(8)|Salary(5)
+
+6.	Sort the emp.lst file in reverse order of Emp. Names.
+ANS: 	sort -t"|" -r -k2 emp.lst
+		Empid(4)|Name(18)|Designation(9)|Dept(10)|Date_of_birth(8)|Salary(5)
+
+7.	Sort the emp.lst file on the salary field, and store the result in file srtf.
+ANS:	sort -t"|" -n -k6 emp.lst
+		Empid(4)|Name(18)|Designation(9)|Dept(10)|Date_of_birth(8)|Salary(5)
+		
+8.	Sort the emp.lst file on designation followed by name.
+ANS:	sort -t"|" -k2 emp.lst
+		Empid(4)|Name(18)|Designation(9)|Dept(10)|Date_of_birth(8)|Salary(5)
+
+9.	Sort the emp.lst file on the year of birth.
+ANS:	sort -t"|" -n -k5.7 emp.lst
+
+10.	Find out the various designations in the employee file. Eliminate duplicate listing of designations.
+ANS:	cut -d"|" -f3emp.lst|uniq
+		Desigantion(9)
+		manager
+
+
+11.	Find the non-repeated designation in the employee file.
+ANS: 	cut -d"|" -f3emp.lst|uniq
+		manager
+		cut -d"|" -f3emp.lst|uniq -d|wc -l
+
+12.	Find the number of employees with various designations in the employee file.
+ANS: 	cut -d"|" -f3 emp.lst | uniq -d|wc -l
+
+13.	Create a listing of the years in which employees were born in, along with number of employees born in that year.
+ANS: cut -f3 newfriends|uniq|wc -l
+
+
+					LAB - 5
+
+5.1: Working wth Vi Editor
+
+1.	Create a file using Vi. Enter the following text:
+
+A network is a group of computers that can communicate with each other, share resources, and access remote hosts or other networks. Netware is a computer network operating system designed to connect, manage, and maintain a network and its services. Some of the network services are Netware Directory Services (NDS), file system, printing and security.
+
+a.	Change the word “Netware” in the second line to “Novell Netware”.
+ANS: ESC+R
+
+b.	Insert the text “(such as hard disks and printers)” after “share resources” in the first line.
+ANS:  ESC + i
+
+c.	Append the following text to the file:
+	“Managing NDS is a fundamental administrator role because NDS provides a single point for accessing and managing most network resources.”
+ANS:	ESC+A
+
+2:  Create the data files, used in the previous lab sessions using vi editor.
+ANS:	vi filename.txt
+		vi friends
+		vi e.txt
+		
+		
+				LAB - 6 SED COMMANDS
+									
+			
+				6.1: USING SED COMMANDS
+									
+
+1. Create a file .Employee.dat. with text as follows.
+        James 76382 PACE Chennai
+        John 34228 GRIT Hyderabad
+        Peter 22321 GE Bangalore
+        Albert 32342 GRIT Pune
+        Mathew 23222 PACE Mumbai
+        Richard 23232 ACS Pune
+
+a) Write a sed command to print only the lines starting at line 2 and ending with the letters .Pune.
+b)Write a sed command that will display the top 5 lines from the file
+        -bash-3.2$ sed "5q" Employee.dat
+        James 76382 PACE Chennai
+        John 34228 GRIT Hyderabad
+        Peter 22321 GE Bangalore
+        Albert 32342 GRIT Pune
+        Mathew 23222 PACE Mumbai
+
+
+c) Write a sed command that will substitute the word .Chennai. for "Pune" used in all instance of the word
+        sed "s/Pune/Chennai/" Employee.dat
+        James 76382 PACE Chennai
+        John 34228 GRIT Hyderabad
+        Peter 22321 GE Bangalore
+        Albert 32342 GRIT Chennai
+        Mathew 23222 PACE Mumbai
+        Richard 23232 ACS Chennai
+
+d) Write a sed command that will replace occurrence of the character e with the string UNIX in all lines. (Use .e option)
+        sed "s/e/Unix/" Employee.dat
+        JamUnixs 76382 PACE Chennai
+        John 34228 GRIT HydUnixrabad
+        PUnixter 22321 GE Bangalore
+        AlbUnixrt 32342 GRIT Pune
+        MathUnixw 23222 PACE Mumbai
+        Richard 23232 ACS PunUnix
+
+e) Write a sed command to delete blank lines
+        sed '/^$/d' Employee.dat
+        James 76382 PACE Chennai
+        John 34228 GRIT Hyderabad
+        Peter 22321 GE Bangalore
+        Albert 32342 GRIT Pune
+        Mathew 23222 PACE Mumbai
+        Richard 23232 ACS Pune
+
+f)Write a sed command to delete lines from 3 to 5
+        sed "3,5d" Employee.dat
+        James 76382 PACE Chennai
+        John 34228 GRIT Hyderabad
+        Richard 23232 ACS Pune
+
+2: Create a new file .PACE.dat which has only the lines that contain the word .PACE. from Employee.dat
+        sed -n "/PACE/p" Employee.dat >PACE.dat
+        cat PACE.dat
+        James 76382 PACE Chennai
+        Mathew 23222 PACE Mumbai
+
+
+			Lab 7.	Process Related Commands
+
+		         7.1: Using Process-Related Commands
+
+1. Find out the PID of the processes that are activated by you
+
+        $ ps -u
+
+2. Find out the information about all the processes that are currently active
+
+        $ ps -u -l
+
+3. Start a different process in the background. Find out the status of the background process using the PID of the same.
+
+        $ sort .o emp.lst emp.lst &
+        $ ps -u -l
+        $ ps 16518
+
+									
+		
+					Lab 8.	AWK
+			8.1: Writing awk-Scripts
+										
+1. Consider the results are stored in following format:
+        EmpID Name Subject Marks(/50)
+        E001 Nilesh Unix 30
+        E002 Suresh DSA 20
+        Like these you have 10 records ( 5 of DSA and 5 of Unix)
+
+1) Display First 5 records.
+        $ cat > emplyee.dat
+        EmpId Name Subject Marks(/50)
+        E001 Nilesh Unix 30
+        E002 Suresh DSA 20
+        E003 Ramesh Unix 40
+        E004 Rahul DSA 10
+        E005 Sam Unix 35
+        E006 Jack Unix 45
+        E007 Arvind DSA 38
+        E008 Neha Unix 48
+        E009 Pooja DSA 20
+        E010 Nancy DSA 50
+
+2) Display Employees who belongs to subject Unix
+        $ awk '$3 == "Unix"' emplyee.dat
+        E001 Nilesh Unix 30
+        E003 Ramesh Unix 40
+        E005 Sam Unix 35
+        E006 Jack Unix 45
+        E008 Neha Unix 48
+
+3) Display employee names that got less than 30 marks in DSA subject.
+        $ awk '$3=="DSA" && $4&lt;30' emplyee.dat
+        E002 Suresh DSA 20
+        E004 Rahul DSA 10
+        E009 Pooja DSA 20
+
+4) Display only even numbered records
+        $ awk 'NR % 2' emplyee.dat
+        EmpId Name Subject Marks(/50)
+        E002 Suresh DSA 20
+        E004 Rahul DSA 10
+        E006 Jack Unix 45
+        E008 Neha Unix 48
+        E010 Nancy DSA 50
+
+5) Display Employee id of records whose name start with N
+        $ awk '$2~/N/' emplyee.dat
+        EmpId Name Subject Marks(/50)
+        E001 Nilesh Unix 30
+        E008 Neha Unix 48
+        E010 Nancy DSA 50
+		
+				LAB - 9
+									
+1: Writing Shell-Scripts
+
+1. Display the Primary and Secondary prompt. Change the primary prompt to your name: temporarily
+        $ echo $PS1
+        [\u@\h \W]\$
+        $ echo $PS2
+        >
+        PS1="RAVINDRA#"
+        RAVINDRA#
+
+2: As soon as you login, the prompt should be changed to your name: also the name of the home directory should be automatically displayed.
+        PS1="RAVINDRA#"
+        RAVINDRA#
+
+3: Check the content of the Environmental variable SHELL.
+        RAVINDRA#echo "$SHELL"
+        /bin/bash
+
+4: Try the below exercise and check the output.
+        Note: Type every line and press enter, do not type the entire code in a vi editor.
+        $continent=.Africa.
+        $echo .$continent.
+        ------------? Africa
+        $sh
+        $echo .$continent.
+        ------------? No Response
+        $continent=.Asia.
+        $echo .$continent.
+        ------------? Asia
+        $ctrl + d
+        $echo .$continent.
+        ------------? Africa
+        $sh
+        $echo .$continent.
+        ------------? No Response
+        $ctrl + d
+
+5: Try the below exercise and check the output. (Export variables)
+        Note: Type every line and press enter, do not type the entire code in a vi editor.
+        $continent=.Africa.
+        export continent
+        $echo .$continent.
+        ------------? Africa
+        $sh
+        $echo .$continent.
+        ------------? Africa
+        $continent=.Asia.
+        $echo .$continent.
+        ------------? Asia
+        $ctrl + d
+        $echo .$continent.
+        ------------? Africa
+
+6: Write a shell script that takes the user name as input and reports whether he / she has logged in or not.
+        r=$(who|grep "$1")
+        if [ -n "$r" ]
+        then
+        echo "$1 logged in"
+        echo $r
+        else
+        echo "$1 isn't logged in"
+        fi
+        $ sh userlog.sh ssis16
+        root logged in
+        root :0 2017-07-11 23:44 (:0) ssis16 pts/0 2017-07-12 00:54 (:0)
+        sh userlog.sh Hari
+
+7: Write a shell script to display the file name and its contents of all the files that is there in the current directory.
+        $ more * | cat
+
+8: Write a shell script, which will take a file name as argument and check whether the file exists and display its access permissions for user.
+        file.sh
+        if [ -e "$1" ]
+        then
+        echo "$1 File Found"
+        else
+        echo "$1 File not found"
+        fi
+
+9: Pass three numbers as command line arguments and display the largest number in the given three numbers.
+        if [ $1 -gt $2 ]; then
+        if [ $1 -gt $3 ]; then
+        echo "$1 is the largest"
+        else
+        echo "$3 is the largest"
+        fi
+        elif [ $2 -gt $3 ]; then
+        echo "$2 is the largest"
+        else
+        echo "$3 is the largest"
+        fi
+
+10: Write a shell script which will accept a pattern and a file name. The pattern will be searched in the file provided. Display appropriate messages and perform necessary validations on file.
+        echo "Enter pattern: "
+        read pat
+        echo "Enter filename: "
+        read filename
+        if [ -f $filename ]
+        then
+        op=$(grep $pat $filename);
+        if [ -n "$op" ]
+        then
+        echo "$op"
+        else
+        echo "Pattern not found."
+        fi
+        else
+        nano patfile.sh
+        sh patfile.sh
+        Enter pattern:
+        Char
+        Enter filename:
+Charu Bhandari Goregaon
+        $ sh patfile.sh
+        Enter pattern:
+        CCC
+        Enter filename:
+        friends.txt
+        Pattern not found.
+        nano patfile.sh
+        sh patfile.sh
+        Enter pattern:
+        Xhar
+        Enter filename:
+        gds
+        File does not exist
+
+11: To create a menu program for a) creating a file, b) Creating a directory, c) copying a file, d) moving a file. (use functions)
+	
+	a. If the file exists already give the appropriate message
+	b. If the dir exists already give the appropriate error message
+	c. Source file should exist if not give a message, It should have read permission if not another message, Destination file either there or not,
+			if not there then create it and copy it.
+			If there, then ask whether to overwrite or not,
+	if yes then overwrite it or else give a message file exists already and not overwritten.
+			create_file&#40;&#41;{
+			echo "Enter file name"
+			read file
+	if [ ! -f $file ]; then
+			touch $file
+			echo "Successfully created file $file"
+			else
+			echo "File already exists! Do you want to override the file?(Y/N)"
+			read ans
+	if [ $ans -eq "Y" -o $ans -eq "y" ]; then
+			touch $file
+			echo "Successfully created file $file"
+			else
+			echo "Not creating file $file...";
+	fi
+	fi
+	}
+			create_dir(){
+					echo "Enter directory name"
+					read dir
+	if [ ! -d $dir ]; then
+					mkdir $dir
+					else
+					echo "Directory already exists!"
+	fi
+			}
+			cp_file&#40;&#41;{
+			echo "Enter source file name"
+			read source
+			echo "Enter destination file name"
+			read des
+	if [ -f $des ]; then
+			echo "Files exists at destination! Want to override(Y/N)"
+			read ans
+	if [ $ans -eq "Y" -o $ans -eq "y" ]; then
+			cp $source $des
+			echo "Successfully copied $source to $des"
+			else
+			echo "Not copying file...";
+	fi
+			else
+			cp $source $des
+			echo "Successfully copied $source to $des"
+	fi
+	}
+			mv_file&#40;&#41;{
+			echo "Enter source file name"
+			read source
+			echo "Enter destination file name"
+			read des
+	if [ -f $source ]; then
+	if [ -f $des ]; then
+			echo "Files exists at destination! Want to override(Y/N)"
+			read ans
+	if [ $ans -eq "Y" -o $ans -eq "y" ]; then
+			mv $source $des
+			echo "Successfully moved $source to $des"
+			else
+			echo "Not moving file...";
+	fi
+			else
+			mv $source $des
+			echo "Successfully moved $source to $des"
+	fi
+			else
+			echo "Source file does not exists"
+	fi
+	}
+			echo "Menu"
+			echo "1. Create a file"
+			echo "2. Create a directory"
+			echo "3. Copy file"
+			echo "4. Move file"
+			echo "5. Exit"
+			read choice
+			case $choice in
+			1)create_file;;
+			2)create_dir;;
+			3)cp_file;;
+			4)mv_file;;
+			5)exit;;
+12: Write a function yesno() to display question to user and accept answer as y/n. If answer to the question is y the function should return 0 otherwise 1.
+Use yesno functions for asking different questions. Question will be passed as parameter to the function.
+Accept filename from user check whether it is file or directory. Use yesno() function to display question do you really want to delete file? If the ans is y, then delete the file or directory.
+yesno(){
+        echo "Do you really want to delete this file? [y/n]"
+        read choice
+        if [ $choice != 'y' ]
+        then
+        return 0
+        else
+        rm $1
+        return 1
+        fi
+        }
+        echo "Enter filename to delete: "
+        read filename
+        yesno $filename
+        ret=$?
+        if [ $ret -eq 1 ]
+        then
+        echo "$filename deleted"
+        else
+        echo "$filename was not deleted"
+        fi
+        $ touch hello.ycyc
+        $ sh yesno.sh
+        Enter filename to delete:
+        hello.ycyc
+        Do you really want to delete this file? [y/n]
+        n
+        hello.ycyc was not deleted
+        $ sh yesno.sh
+        Enter filename to delete:
+        hello.ycyc
+        Do you really want to delete this file? [y/n]
+        y
+        hello.ycyc deleted
+
+13: Write a shell script to store names of four employees and check whether those employees are currently logged in or not. Display appropriate message.
+        r1=$(who|grep "$1")
+        if [ -n "$r1" ]
+        then
+        echo "$1 logged in"
+        echo $r1
+        else
+        echo "$1 isn't logged in"
+fi
+        r2=$(who|grep "$2")
+        if [ -n "$r2" ]
+        then
+        echo "$2 logged in"
+        echo $r2
+        else
+        echo "$2 isn't logged in"
+fi
+        r3=$(who|grep "$3")
+if [ -n "$r3" ]
+        then
+        echo "$3 logged in"
+        echo $r3
+        else
+        echo "$3 isn't logged in"
+fi
+        r4=$(who|grep "$4")
+if [ -n "$r4" ]
+        then
+        echo "$4 logged in"
+        echo $r4
+        else
+        echo "$4 isn't logged in"
+fi
+        sh userlog.sh raunak rtw rtw
+        Hari isn't logged in
+        root logged in
+        root :0 2017-07-13 23:44 (:0) root pts/0 2017-07-12 00:54 (:0)
+        root logged in
+        root :0 2017-07-13 23:44 (:0) root pts/0 2017-07-12 00:54 (:0)
+        Hari isn't logged in
+
+14: Accept the users first and last name and the echo the entire name along with some suitable comment.
+        #fl.sh
+        echo "Enter first name"
+        read fname
+        echo "Enter last name"
+        read lname
+        echo "Your name is$fname $lname"
+
+15: List all files that have been modified today.
+        $ find . -mtime -1 -print
+
+16: Display long listing of only the regular files in the current directory.
+        $ ls -p -l | grep -v /
+
+17: Display details of all files in the 2 .paths. accepted from user. The display should be screen by screen.
+        echo "Enter First Path"
+        read path1
+        echo "Enter Second Path"
+        read path2
+        echo "-----------Path 1 Files-----------------------"
+        ls $path1
+        echo "-----------Path 2 Files-----------------------"
+        ls $path2
+
+18: Let the script display its name and its PID.
+                echo "The script name is $0"
+        echo "The script pid is $$"
+
+19: Get the concatenated o/p of 2 files into a third file: Take 3 command line arguments: The first argument is the name of a destination file,
+	and the other two arguments are names of files whose contents are to be placed in the destination file.
+        $ cat "$2 $3 > $1"
+
+20: Write a menu driven shell program to:
+			a. Display calendar of current month
+			b. Search for a pattern in all the files/subdirectories from current directory.
+			c. Count the no. of directories / sub directories in current directory
+			ch='y'
+			while [ $ch == "y" ]
+			do
+			echo "1. Calendar of the current month"
+			echo "2. Search for a pattern"
+			echo "3. Count no. of directories/ sub-directories in directory"
+			echo "Enter 1, 2 or 3:"
+			read choice
+			case $choice in
+
+	1) echo "Calendar for this month"
+			cal;;
+
+	2) echo "Enter pattern:"
+			read pat
+			grep $pat * -r;;
+
+	3) echo "Here is count of all the directories / sub-directories:"
+			ls -r * | wc -l;;
+			*) echo "Enter valid choic.";;
+			esac
+			$ sh menu.sh
+			1. Calendar of the current month
+			2. Search for a pattern
+			3. Count no. of directories/ sub-directories in directory
+
+	Enter 1, 2 or 3:
+			1
+	Calendar for this month
+	July 2017
+	Su Mo Tu We Th Fr Sa
+	1
+	2 3 4 5 6 7 8
+	9 10 11 12 13 14 15
+	16 17 18 19 20 21 22
+	23 24 25 26 27 28 29
+	30 31
+
+	Do you want to continue?[y/n]
+	y
+	1. Calendar of the current month
+	2. Search for a pattern
+	3. Count no. of directories/ sub-directories in directory
+
+	Enter 1, 2 or 3:
+	2
+	Enter pattern:
+	Virag
+	friends.txt:2. Virag Shah Mulund
+	myfiles/friends.txt:2. Virag Shah Mulund
+	myfiles/myfriends.txt:1. Virag Shah Mulund
+	myfriends.txt:2. Virag Shah Mulund
+	result:2. Virag Shah Mulund
+	result:2. Virag Shah Mulund
+	Do you want to continue?[y/n]
+	y
+	1. Calendar of the current month
+	2. Search for a pattern
+	3. Count no. of directories/ sub-directories in directory
+	Enter 1, 2 or 3:
+	3
+	Here is count of all the directories / sub-directories:
+	60
+	Do you want to continue?[y/n]
+	
+21: Display day of week for a given date. (ddmmyyyy)
+If day is Monday, display message .Monday Blues.
+        Friday display message .yeh! It.s week end..
+        Similarly display different messages for each day of the week.
+        $ echo "Enter date: (dd-mm-yyyy)"
+        read date
+        DAY=$(cut -d"-" -f1<<<"$date")
+        MONTH=$(cut -d"-" -f2<<<"$date")
+        YEAR=$(cut -d"-" -f3<<<"$date")
+        newdate="$MONTH/$DAY/$YEAR"
+        day=$(date -d $newdate +'%A')
+        #echo $day
+        case $day in
+        "Monday") echo "Monday Blues" ;;
+        "Tuesday") echo "Still tuesday" ;;
+        "Wednesday") echo "Boring wednesday" ;;
+        "Thursday") echo "Nearing weekend" ;;
+        "Friday") echo "It's the weekend!" ;;
+        "Saturday") echo "One more day off!" ;;
+        "Sunday") echo "Monday tomorrow" ;;
+        *) echo "Bye" ;;
+        esac
+        $ nano daydate.sh
+        sh daydate.sh
+        Enter date: (dd-mm-yyyy)
+        18-12-1995
+			
+
+
+
