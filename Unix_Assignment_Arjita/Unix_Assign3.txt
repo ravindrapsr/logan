@@ -1,0 +1,22 @@
+## UNIX_LAB_3
+
+3.1: Viewing the File System and Granting/Removing Permissions
+(Note: Create required files if doesn’t exists.)
+
+
+1. Give the execute permission for the user for a file chap1
+>> chmod u+x chap1
+
+2. Give the execute permission for user, group and others for a file add.c
+>> chmod a+x add.c
+
+3. Remove the execute permission from user, give read permission to group and others for a file aa.c
+>> chmod u-x,go+r aa.c
+
+4. Give execute permission for users for a.c, kk.c, nato and myfile using single command
+>> ls -l a.c kk.c nato myfile
+
+5. Change the directory to root directory. Check the system directories, like bin, etc, usr etc
+>> cd /
+
+

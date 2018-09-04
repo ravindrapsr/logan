@@ -1,0 +1,425 @@
+## UNIX_LAB_6
+
+6.1: Writing Shell-Scripts
+
+1. Display the Primary and Secondary prompt. Change the primary prompt to your name: temporarily
+>>  echo $PS1
+    [\u@\h \W]\$
+    echo $PS2
+    >
+    PS1="Ravindra"
+        Yash#
+
+2: As soon as you login, the prompt should be changed to your name: also the name of the home directory should be automatically displayed.
+>>  Ravindra#: command not found
+    Ravindra# 
+
+
+3: Check the content of the Environmental variable SHELL.
+>>  Ravindra# echo "$SHELL"
+    /bin/bash
+
+4: Try the below exercise and check the output.
+>>  $continent=.Africa.
+        $echo .$continent.
+        ------------? Africa
+        $sh
+        $echo .$continent.
+        ------------? No Response
+        $continent=.Asia.
+        $echo .$continent.
+        ------------? Asia
+        $ctrl + d
+        $echo .$continent.
+        ------------? Africa
+        $sh
+        $echo .$continent.
+        ------------? No Response
+        $ctrl + d
+
+
+5: Try the below exercise and check the output. (Export variables)
+>>  $continent=.Africa.
+        export continent
+        $echo .$continent.
+        ------------? Africa
+        $sh
+        $echo .$continent.
+        ------------? Africa
+        $continent=.Asia.
+        $echo .$continent.
+        ------------? Asia
+        $ctrl + d
+        $echo .$continent.
+        ------------? Africa
+
+6: Write a shell script that takes the user name as input and reports whether he / she has logged in or not.
+>>      r=$(who|grep "$1")
+        if [ -n "$r" ]
+        then
+        echo "$1 logged in"
+        echo $r
+        else
+        echo "$1 isn't logged in"
+        fi
+        $ sh userlog.sh ssis16
+        root logged in
+        root :0 2017-07-11 23:44 (:0) ssis16 pts/0 2017-07-12 00:54 (:0)
+        sh userlog.sh Hari
+
+7: Write a shell script to display the file name and its contents of all the files that is there in the current directory.
+>>  $ more * | cat
+
+8: Write a shell script, which will take a file name as argument and check whether the file exists and display its access permissions for user.
+>>      file.sh
+        if [ -e "$1" ]
+        then
+        echo "$1 File Found"
+        else
+        echo "$1 File not found"
+        fi
+
+9: Pass three numbers as command line arguments and display the largest number in the given three numbers.
+>>      if [ $1 -gt $2 ]; then
+        if [ $1 -gt $3 ]; then
+        echo "$1 is the largest"
+        else
+        echo "$3 is the largest"
+        fi
+        elif [ $2 -gt $3 ]; then
+        echo "$2 is the largest"
+        else
+        echo "$3 is the largest"
+        fi
+
+10: Write a shell script which will accept a pattern and a file name. The pattern will be searched in the file provided. Display appropriate messages and perform necessary validations on file.
+>>      echo "Enter pattern: "
+        read pat
+        echo "Enter filename: "
+        read filename
+        if [ -f $filename ]
+        then
+        op=$(grep $pat $filename);
+        if [ -n "$op" ]
+        then
+        echo "$op"
+        else
+        echo "Pattern not found."
+        fi
+        else
+        nano patfile.sh
+        sh patfile.sh
+        Enter pattern:
+        Char
+        Enter filename:
+Charu Bhandari Goregaon
+        $ sh patfile.sh
+        Enter pattern:
+        CCC
+        Enter filename:
+        friends.txt
+        Pattern not found.
+        nano patfile.sh
+        sh patfile.sh
+        Enter pattern:
+        Xhar
+        Enter filename:
+        gds
+        File does not exist
+
+11: To create a menu program for a) creating a file, b) Creating a directory, c) copying a file, d) moving a file. (use functions)
+	
+	a. If the file exists already give the appropriate message
+	b. If the dir exists already give the appropriate error message
+	c. Source file should exist if not give a message, It should have read permission if not another message, Destination file either there or not,
+			if not there then create it and copy it.
+			If there, then ask whether to overwrite or not,
+	if yes then overwrite it or else give a message file exists already and not overwritten.
+			create_file&#40;&#41;{
+			echo "Enter file name"
+			read file
+	if [ ! -f $file ]; then
+			touch $file
+			echo "Successfully created file $file"
+			else
+			echo "File already exists! Do you want to override the file?(Y/N)"
+			read ans
+	if [ $ans -eq "Y" -o $ans -eq "y" ]; then
+			touch $file
+			echo "Successfully created file $file"
+			else
+			echo "Not creating file $file...";
+	fi
+	fi
+	}
+			create_dir(){
+					echo "Enter directory name"
+					read dir
+	if [ ! -d $dir ]; then
+					mkdir $dir
+					else
+					echo "Directory already exists!"
+	fi
+			}
+			cp_file&#40;&#41;{
+			echo "Enter source file name"
+			read source
+			echo "Enter destination file name"
+			read des
+	if [ -f $des ]; then
+			echo "Files exists at destination! Want to override(Y/N)"
+			read ans
+	if [ $ans -eq "Y" -o $ans -eq "y" ]; then
+			cp $source $des
+			echo "Successfully copied $source to $des"
+			else
+			echo "Not copying file...";
+	fi
+			else
+			cp $source $des
+			echo "Successfully copied $source to $des"
+	fi
+	}
+			mv_file&#40;&#41;{
+			echo "Enter source file name"
+			read source
+			echo "Enter destination file name"
+			read des
+	if [ -f $source ]; then
+	if [ -f $des ]; then
+			echo "Files exists at destination! Want to override(Y/N)"
+			read ans
+	if [ $ans -eq "Y" -o $ans -eq "y" ]; then
+			mv $source $des
+			echo "Successfully moved $source to $des"
+			else
+			echo "Not moving file...";
+	fi
+			else
+			mv $source $des
+			echo "Successfully moved $source to $des"
+	fi
+			else
+			echo "Source file does not exists"
+	fi
+	}
+			echo "Menu"
+			echo "1. Create a file"
+			echo "2. Create a directory"
+			echo "3. Copy file"
+			echo "4. Move file"
+			echo "5. Exit"
+			read choice
+			case $choice in
+			1)create_file;;
+			2)create_dir;;
+			3)cp_file;;
+			4)mv_file;;
+			5)exit;;
+
+12: Write a function yesno() to display question to user and accept answer as y/n. If answer to the question is y the function should return 0 otherwise 1.
+Use yesno functions for asking different questions. Question will be passed as parameter to the function.
+Accept filename from user check whether it is file or directory. Use yesno() function to display question do you really want to delete file? If the ans is y, then delete the file or directory.
+>>  yesno(){
+        echo "Do you really want to delete this file? [y/n]"
+        read choice
+        if [ $choice != 'y' ]
+        then
+        return 0
+        else
+        rm $1
+        return 1
+        fi
+        }
+        echo "Enter filename to delete: "
+        read filename
+        yesno $filename
+        ret=$?
+        if [ $ret -eq 1 ]
+        then
+        echo "$filename deleted"
+        else
+        echo "$filename was not deleted"
+        fi
+        $ touch hello.ycyc
+        $ sh yesno.sh
+        Enter filename to delete:
+        hello.ycyc
+        Do you really want to delete this file? [y/n]
+        n
+        hello.ycyc was not deleted
+        $ sh yesno.sh
+        Enter filename to delete:
+        hello.ycyc
+        Do you really want to delete this file? [y/n]
+        y
+        hello.ycyc deleted
+
+13: Write a shell script to store names of four employees and check whether those employees are currently logged in or not. Display appropriate message.
+>>      r1=$(who|grep "$1")
+        if [ -n "$r1" ]
+        then
+        echo "$1 logged in"
+        echo $r1
+        else
+        echo "$1 isn't logged in"
+fi
+        r2=$(who|grep "$2")
+        if [ -n "$r2" ]
+        then
+        echo "$2 logged in"
+        echo $r2
+        else
+        echo "$2 isn't logged in"
+fi
+        r3=$(who|grep "$3")
+if [ -n "$r3" ]
+        then
+        echo "$3 logged in"
+        echo $r3
+        else
+        echo "$3 isn't logged in"
+fi
+        r4=$(who|grep "$4")
+if [ -n "$r4" ]
+        then
+        echo "$4 logged in"
+        echo $r4
+        else
+        echo "$4 isn't logged in"
+fi
+        sh userlog.sh raunak rtw rtw
+        Hari isn't logged in
+        root logged in
+        root :0 2017-07-13 23:44 (:0) root pts/0 2017-07-12 00:54 (:0)
+        root logged in
+        root :0 2017-07-13 23:44 (:0) root pts/0 2017-07-12 00:54 (:0)
+        Hari isn't logged in
+
+14: Accept the users first and last name and the echo the entire name along with some suitable comment.
+>>      #fl.sh
+        echo "Enter first name"
+        read fname
+        echo "Enter last name"
+        read lname
+        echo "Your name is$fname $lname"
+
+15: List all files that have been modified today.
+>>  $ find . -mtime -1 -print
+
+16: Display long listing of only the regular files in the current directory.
+>>  $ ls -p -l | grep -v /
+
+17: Display details of all files in the 2 .paths. accepted from user. The display should be screen by screen.
+>>      echo "Enter First Path"
+        read path1
+        echo "Enter Second Path"
+        read path2
+        echo "-----------Path 1 Files-----------------------"
+        ls $path1
+        echo "-----------Path 2 Files-----------------------"
+        ls $path2
+
+18: Let the script display its name and its PID.
+>>  echo "The script name is $0"
+>>  echo "The script pid is $$"
+
+19: Get the concatenated o/p of 2 files into a third file: Take 3 command line arguments: The first argument is the name of a destination file,
+	and the other two arguments are names of files whose contents are to be placed in the destination file.
+        $ cat "$2 $3 > $1"
+
+20: Write a menu driven shell program to:
+a. Display calendar of current month
+b. Search for a pattern in all the files/subdirectories from current directory.
+c. Count the no. of directories / sub directories in current directory
+			ch='y'
+			while [ $ch == "y" ]
+			do
+			echo "1. Calendar of the current month"
+			echo "2. Search for a pattern"
+			echo "3. Count no. of directories/ sub-directories in directory"
+			echo "Enter 1, 2 or 3:"
+			read choice
+			case $choice in
+
+	1) echo "Calendar for this month"
+			cal;;
+
+	2) echo "Enter pattern:"
+			read pat
+			grep $pat * -r;;
+
+	3) echo "Here is count of all the directories / sub-directories:"
+			ls -r * | wc -l;;
+			*) echo "Enter valid choic.";;
+			esac
+			$ sh menu.sh
+			1. Calendar of the current month
+			2. Search for a pattern
+			3. Count no. of directories/ sub-directories in directory
+
+	Enter 1, 2 or 3:
+			1
+	Calendar for this month
+	July 2017
+	Su Mo Tu We Th Fr Sa
+	1
+	2 3 4 5 6 7 8
+	9 10 11 12 13 14 15
+	16 17 18 19 20 21 22
+	23 24 25 26 27 28 29
+	30 31
+
+	Do you want to continue?[y/n]
+	y
+	1. Calendar of the current month
+	2. Search for a pattern
+	3. Count no. of directories/ sub-directories in directory
+
+	Enter 1, 2 or 3:
+	2
+	Enter pattern:
+	Virag
+	friends.txt:2. Virag Shah Mulund
+	myfiles/friends.txt:2. Virag Shah Mulund
+	myfiles/myfriends.txt:1. Virag Shah Mulund
+	myfriends.txt:2. Virag Shah Mulund
+	result:2. Virag Shah Mulund
+	result:2. Virag Shah Mulund
+	Do you want to continue?[y/n]
+	y
+	1. Calendar of the current month
+	2. Search for a pattern
+	3. Count no. of directories/ sub-directories in directory
+	Enter 1, 2 or 3:
+	3
+	Here is count of all the directories / sub-directories:
+	60
+	Do you want to continue?[y/n]
+	
+21: Display day of week for a given date. (ddmmyyyy)
+>>  If day is Monday, display message .Monday Blues.
+        Friday display message .yeh! It.s week end..
+        Similarly display different messages for each day of the week.
+        $ echo "Enter date: (dd-mm-yyyy)"
+        read date
+        DAY=$(cut -d"-" -f1<<<"$date")
+        MONTH=$(cut -d"-" -f2<<<"$date")
+        YEAR=$(cut -d"-" -f3<<<"$date")
+        newdate="$MONTH/$DAY/$YEAR"
+        day=$(date -d $newdate +'%A')
+        #echo $day
+        case $day in
+        "Monday") echo "Monday Blues" ;;
+        "Tuesday") echo "Still tuesday" ;;
+        "Wednesday") echo "Boring wednesday" ;;
+        "Thursday") echo "Nearing weekend" ;;
+        "Friday") echo "It's the weekend!" ;;
+        "Saturday") echo "One more day off!" ;;
+        "Sunday") echo "Monday tomorrow" ;;
+        *) echo "Bye" ;;
+        esac
+        $ nano daydate.sh
+        sh daydate.sh
+        Enter date: (dd-mm-yyyy)
+        18-12-1995
